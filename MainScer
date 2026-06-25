@@ -53,13 +53,13 @@ local function script()
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
 
-    MainSection:NewLabel("Misc")
+    MainSection:NewLabel("Created by ZUHZUHLAH")
 
-    MainSection:NewSlider("Walkspeed", "Sets a speed for your character", 150, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    MainSection:NewSlider("Walkspeed", "Sets a speed for your character", 150, 16, function(s)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
     end)
 
-    MainSection:NewSlider("Jump Power", "Sets the strength of your jump", 250, 50, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    MainSection:NewSlider("Jump Power", "Sets the strength of your jump", 250, 50, function(s)
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
     end)
 
