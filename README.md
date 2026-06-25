@@ -7,6 +7,6 @@ WE STRICTLY PROHIBIT THE USE OF USING THIS SCRIPT IN THE GAME TO GET A HUGE AND 
 WHEN USING THE SCRIPT YOU ABIDE BY THE TERMS OF SERVICE ROBLOX AND GITHUB CONDUCTS. THIS SCRIPT SHOULD ONLY BE USED FOR TESTING ANTICHEATS IN A GAME AND DEFINITELY NOT FOR MISUSE. 
 
 
-# Loadstring
+# Loadstring:
 
-# ``loadstring(game:HttpGet("))()``
+# ``loadstring(game:HttpGet("https://raw.githubusercontent.com/Denkmerp/Sahex/refs/heads/main/MainScer"))()``
