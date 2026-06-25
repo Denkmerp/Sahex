@@ -1,0 +1,80 @@
+-- SAHEX HUB
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+local Toggle1 =  false
+local Toggle2 = false
+
+local function notif1On()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Toggle",
+        Text = "Toggle Turned on!",
+        Callback = Instance.new("BindableFunction"),
+        Button1 = "OK" 
+    })
+end
+
+local function notif1Off()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Toggle",
+        Text = "Toggled off!",
+        Callback = Instance.new("BindableFunction"),
+        Button1 = "OK" 
+    })
+end
+
+local function autoLvl()
+    while true do 
+        wait(0.25)
+
+        if  Toggle1 == true then
+            local Event = game:GetService("ReplicatedStorage").MouseClicked
+            Event:FireServer()
+         end
+    end
+end
+
+local function script()
+    local Window = Library.CreateLib("Sahex Hub ", "Synapse")
+
+    local Main = Window:NewTab("Main")
+    local MainSection = Tab:NewSection("Main")
+
+    MainSection:NewSlider("Walkspeed", "Sets a speed for your character", 150, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+    end)
+
+    MainSection:NewSlider("Jump Power", "Sets the strength of your jump", 250, 50, function(s) -- 500 (MaxValue) | 0 (MinValue)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+    end)
+
+    Section:NewToggle("ToggleText", "ToggleInfo", function(state)
+        if state then
+            Toggle1 = true
+            notif1On()
+            autoLvl()
+        else
+            Toggle1 = false
+            notif1Off()
+        end
+    end)
+end
+
+if game.PlaceId == 130526979296684 then
+    script()
+else
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "WARNING!",
+        Text = "GAME IS NOT SUPPORTED! NO UI IS SHOWING RIGHT NOW!",
+        Icon = "rbxassetid://174811607", 
+        Duration = 10,
+        Callback = Instance.new("BindableFunction"),
+        Button1 = "OK" 
+    })
+
+    local AlarmSound = Instance.new("Sound") 
+    AlarmSound.Parent = game.Workspace
+    AlarmSound.SoundId = "rbxassetid://6432593850"
+    AlarmSound.Playing = true
+    AlarmSound.Volume = 1
+end
