@@ -14,6 +14,7 @@ local function notif1On()
     })
 end
 
+
 local function notif1Off()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Toggle",
@@ -34,11 +35,25 @@ local function autoLvl()
     end
 end
 
+local function autoRb()
+    while true do 
+        wait(0.25)
+    if  Btn2Toggle == true then
+        local Event = game:GetService("ReplicatedStorage").RebirthEvent
+    
+        Event:FireServer()
+    end
+end
+
+
+
 local function script()
-    local Window = Library.CreateLib("Sahex Hub ", "Synapse")
+    local Window = Library.CreateLib("Sahex Hub ", "Ocean")
 
     local Main = Window:NewTab("Main")
-    local MainSection = Tab:NewSection("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewLabel("Misc")
 
     MainSection:NewSlider("Walkspeed", "Sets a speed for your character", 150, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
@@ -48,7 +63,9 @@ local function script()
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
     end)
 
-    Section:NewToggle("ToggleText", "ToggleInfo", function(state)
+    MainSection:NewLabel("Grinding")
+
+    MainSection:NewToggle("AUTO LEVEL", "Levels you up infinitely until you turn off", function(state)
         if state then
             Toggle1 = true
             notif1On()
@@ -58,6 +75,47 @@ local function script()
             notif1Off()
         end
     end)
+
+    MainSection:NewToggle("AUTO REBIRTH", "Infinitely tries to make you rebirth until you turn off", function(state)
+        if state then
+            Toggle2 = true
+            notif1On()
+            autoRb()
+        else
+            Toggle2 = false
+            notif1Off()
+        end
+    end)
+
+    MainSection:NewButton("Remove Tsunami", "Destroys the TSUNAMI FOR THE MINIGAME", function()
+        while wait (0.1) do 
+            for i = 1,200 do 
+                wait(0.1)
+                game.Workspace:WaitForChild("MinigameTsunami"):Destroy()
+            end
+        end
+    end)
+
+    local Fun = Window:NewTab("Fun Stuff")
+    local FunSection = Fun:NewSection("Fun Stuff")
+
+    FunSection:NewLabel("Gender Types")
+    
+    FunSection:NewButton("Turn into boy", "Self explanatory", function()
+        local Event = game:GetService("ReplicatedStorage").BoyEvent
+        Event:FireServer(
+            game:GetService("Players").LocalPlayer
+        )
+    end)
+
+    FunSection:NewButton("Turn into Girl", "Self explanatory", function()
+        local Event = game:GetService("ReplicatedStorage").GirlEvent
+        Event:FireServer(
+            game:GetService("Players").LocalPlayer
+        )
+    end)
+
+    FunSection:NewLabel("More Coming Soon...")
 end
 
 if game.PlaceId == 130526979296684 then
