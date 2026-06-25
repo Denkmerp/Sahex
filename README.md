@@ -9,4 +9,4 @@ WHEN USING THE SCRIPT YOU ABIDE BY THE TERMS OF SERVICE ROBLOX AND GITHUB CONDUC
 
 # Loadstring
 
-``loadstring(game:HttpGet("))()``
+# ``loadstring(game:HttpGet("))()``
