@@ -1,15 +1,145 @@
+-- SAHEX HUB
 
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "WARNING!",
-    Text = "SCRIPT IS BEING UPDATED WAIT A SECOND!",
-     Icon = "rbxassetid://174811607", 
-     Duration = 10,
-    Callback = Instance.new("BindableFunction"),
-    Button1 = "OK" 
-})
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
 
-local AlarmSound = Instance.new("Sound") 
-AlarmSound.Parent = game.Workspace
-AlarmSound.SoundId = "rbxassetid://6432593850"
-AlarmSound.Playing = true
-AlarmSound.Volume = 1
+local Toggle1 =  false
+local Toggle2 = false
+
+local function notif1On()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Toggle",
+        Text = "Toggle Turned on!",
+        Callback = Instance.new("BindableFunction"),
+        Button1 = "OK" 
+    })
+end
+
+
+local function notif1Off()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Toggle",
+        Text = "Toggled off!",
+        Callback = Instance.new("BindableFunction"),
+        Button1 = "OK" 
+    })
+end
+
+local function autoLvl()
+    while true do 
+        wait(0.25)
+
+        if  Toggle1 == true then
+            local Event = game:GetService("ReplicatedStorage").MouseClicked
+            Event:FireServer()
+         end
+    end
+end
+
+local function autoRb()
+    while true do 
+        wait(0.25)
+    if  Btn2Toggle == true then
+        local Event = game:GetService("ReplicatedStorage").RebirthEvent
+    
+        Event:FireServer()
+    end
+end
+
+
+
+local function script()
+    local Window = Library.CreateLib("Sahex Hub - [A1]", "Ocean")
+
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewLabel("Created by ZUHZUHLAH")
+
+    MainSection:NewSlider("Walkspeed", "Sets a speed for your character", 150, 16, function(s) -- 500 (MaxValue) | 0 (MinValue)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+    end)
+
+    MainSection:NewSlider("Jump Power", "Sets the strength of your jump", 250, 50, function(s) -- 500 (MaxValue) | 0 (MinValue)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+    end)
+
+    MainSection:NewLabel("Grinding")
+
+    MainSection:NewToggle("AUTO LEVEL", "Levels you up infinitely until you turn off", function(state)
+        if state then
+            Toggle1 = true
+            notif1On()
+            autoLvl()
+        else
+            Toggle1 = false
+            notif1Off()
+        end
+    end)
+
+    MainSection:NewToggle("AUTO REBIRTH", "Infinitely tries to make you rebirth until you turn off", function(state)
+        if state then
+            Toggle2 = true
+            notif1On()
+            autoRb()
+        else
+            Toggle2 = false
+            notif1Off()
+        end
+    end)
+
+    MainSection:NewButton("Remove Tsunami", "Destroys the TSUNAMI FOR THE MINIGAME", function()
+        while wait (0.1) do 
+            for i = 1,200 do 
+                wait(0.1)
+                game.Workspace:WaitForChild("MinigameTsunami"):Destroy()
+            end
+        end
+    end)
+
+    local Fun = Window:NewTab("Fun Stuff")
+    local FunSection = Fun:NewSection("Fun Stuff")
+
+    FunSection:NewLabel("Gender Types")
+    
+    FunSection:NewButton("Turn into boy", "Self explanatory", function()
+        local Event = game:GetService("ReplicatedStorage").BoyEvent
+        Event:FireServer(
+            game:GetService("Players").LocalPlayer
+        )
+    end)
+
+    FunSection:NewButton("Turn into Girl", "Self explanatory", function()
+        local Event = game:GetService("ReplicatedStorage").GirlEvent
+        Event:FireServer(
+            game:GetService("Players").LocalPlayer
+        )
+    end)
+
+    FunSection:NewLabel("More Coming Soon...")
+
+    local Creds = Window:NewTab("Credits")
+    local CredsSection = Creds:NewSection("Credits")
+
+    CredsSection:NewLabel("Made by ZUHZUHLAH.")
+    CredsSection:NewLabel("sites.google.com/view/sahex-lol/home")
+
+end
+
+if game.PlaceId == 130526979296684 then
+    script()
+else
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "WARNING!",
+        Text = "GAME IS NOT SUPPORTED! NO UI IS SHOWING RIGHT NOW!",
+        Icon = "rbxassetid://174811607", 
+        Duration = 10,
+        Callback = Instance.new("BindableFunction"),
+        Button1 = "OK" 
+    })
+
+    local AlarmSound = Instance.new("Sound") 
+    AlarmSound.Parent = game.Workspace
+    AlarmSound.SoundId = "rbxassetid://6432593850"
+    AlarmSound.Playing = true
+    AlarmSound.Volume = 1
+end
