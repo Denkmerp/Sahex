@@ -10,3 +10,4 @@ WHEN USING THE SCRIPT YOU ABIDE BY THE TERMS OF SERVICE ROBLOX AND GITHUB CONDUC
 # Loadstring:
 
 # ``loadstring(game:HttpGet("https://raw.githubusercontent.com/Denkmerp/Sahex/refs/heads/main/MainScer"))()``
+# ``loadstring(game:HttpGet("https://raw.githubusercontent.com/Denkmerp/Sahex/refs/heads/main/MainV2"))()``
