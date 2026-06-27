@@ -38,17 +38,18 @@ end
 local function autoRb()
     while true do 
         wait(0.25)
-    if  Btn2Toggle == true then
-        local Event = game:GetService("ReplicatedStorage").RebirthEvent
-    
-        Event:FireServer()
+
+        if  Toggle2 == true then
+            local Event = game:GetService("ReplicatedStorage").RebirthEvent
+            Event:FireServer()
+         end
     end
 end
 
 
 
 local function script()
-    local Window = Library.CreateLib("Sahex Hub - [A1]", "Ocean")
+    local Window = Library.CreateLib("Sahex Hub - [A1]", "Synapse")
 
     local Main = Window:NewTab("Main")
     local MainSection = Main:NewSection("Main")
@@ -60,7 +61,7 @@ local function script()
     end)
 
     MainSection:NewSlider("Jump Power", "Sets the strength of your jump", 250, 50, function(s) -- 500 (MaxValue) | 0 (MinValue)
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+        game.Players.LocalPlayer.Character.Humanoid.JumpHeight = s
     end)
 
     MainSection:NewLabel("Grinding")
