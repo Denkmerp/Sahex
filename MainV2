@@ -188,8 +188,8 @@ local Label5 = Fun:CreateLabel("Money Grind", nil, Color3.fromRGB(255, 255, 255)
         end,
     })
 
-    local Label6 = Fun:CreateLabel("Made by ZUHZUHLAH", nil, Color3.fromRGB(255, 255, 255), false)
-    local Label7 = Fun:CreateLabel("sites.google.com/view/sahex-lol", nil, Color3.fromRGB(255, 255, 255), false)
+    local Label6 = Credits:CreateLabel("Made by ZUHZUHLAH", nil, Color3.fromRGB(255, 255, 255), false)
+    local Label7 = Credits:CreateLabel("sites.google.com/view/sahex-lol", nil, Color3.fromRGB(255, 255, 255), false)
 
     Rayfield:LoadConfiguration()
 end
