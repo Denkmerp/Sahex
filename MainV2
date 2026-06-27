@@ -197,14 +197,26 @@ end
 if game.PlaceId == 130526979296684 then
     A1()
 else
-     game:GetService("StarterGui"):SetCore("SendNotification", {
-        Title = "WARNING!",
-        Text = "Go to 'sites.google.com/view/sahex-lol' to find supported games",
-        Icon = "rbxassetid://174811607", 
-        Duration = 15,
-        Callback = Instance.new("BindableFunction"),
-        Button1 = "OK" 
-    })
+     local StarterGui = game:GetService("StarterGui")
+
+    local function notifyWithCopy(title, message, clipboardText)
+        if clipboardText and setclipboard then
+            setclipboard(clipboardText)
+        end
+    
+        StarterGui:SetCore("SendNotification", {
+            Title = title or "Notification";
+            Text = message or "Check your clipboard!";
+            Duration = 10;
+            Button1 = "Okay";
+        })
+    
+            print("📋 Copied to clipboard: " .. (clipboardText or message))
+        end
+
+    notifyWithCopy("Game Not supported", "This game is not supported. We copied our website to your cliboard check our games we support.", "sites.google.com/view/sahex-lol/livegames")
+
+    print("Official Roblox notifications script loaded with clipboard copy!")
 
     local AlarmSound = Instance.new("Sound") 
     AlarmSound.Parent = game.Workspace
