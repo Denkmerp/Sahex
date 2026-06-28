@@ -4,6 +4,8 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHept
 
 local Toggle1 =  false
 local Toggle2 = false
+local Toggle3 = false
+local Toggle4 = false
 
 local function notif1On()
     game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -14,6 +16,14 @@ local function notif1On()
     })
 end
 
+local function notif2On()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Toggle",
+        Text = "Toggle Turned on! WAITING 2 SECONDS",
+        Callback = Instance.new("BindableFunction"),
+        Button1 = "OK" 
+    })
+end
 
 local function notif1Off()
     game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -46,6 +56,94 @@ local function autoRb()
     end
 end
 
+local function autGr()
+    while true do
+        
+        wait(2)
+
+        if Toggle3 == true then
+            local Character = game.Players.LocalPlayer.Character
+            local LP = game.Players.LocalPlayer
+            local PlrPlot = game.Workspace:FindFirstChild("Plot_" .. LP.Name)
+
+            Character:MoveTo("-0.00012599999899975955, 0.12499900162220001, 2016")
+
+            wait(0.25)
+
+            Character:MoveTo("-0.00012599999899975955, 0.12499900162220001, 2016")
+
+            wait(6.5)
+
+            if string.find(game.Players:WaitForChild(LP.Name).PlayerGui.GUI.Frames.Notifications:FindFirstChild("ActiveNotification").Text:lower(), "divine") then
+
+                Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+
+            elseif
+                string.find(game.Players:FindFirstChild(LP.Name).PlayerGui.GUI.Frames.Notifications.ActiveNotification.Text:lower(), "secret") then
+                    Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                    Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                    Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                    Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                    
+                    game.Players:FindFirstChild(LP.Name).PlayerGui.GUI.Frames.Notifications.ActiveNotification:Destroy()
+
+            else
+                print("Fack nah")
+                wait(1)
+            end
+        end
+
+        wait()
+    end
+end
+
+local function autoGrind()
+    while true do 
+        wait(2)
+
+        if Toggle3 == true and Toggle4 == true then
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+                Title = "WARNING!",
+                Text = "Auto grind (For other items) has been turned off. To stop this, Turn off one of the Grinders",
+                Duration = 10,
+                Callback = Instance.new("BindableFunction"),
+                Button1 = "OK" 
+            })
+
+            local AlarmSound = Instance.new("Sound") 
+            AlarmSound.Parent = game.Workspace
+            AlarmSound.SoundId = "rbxassetid://6432593850"
+            AlarmSound.Playing = true
+            AlarmSound.Volume = 1
+
+            wait(10)
+
+            AlarmSound:Destroy()
+        elseif  Toggle4 == true then
+            local Character = game.Players.LocalPlayer.Character
+            local LP = game.Players.LocalPlayer
+            local PlrPlot = game.Workspace:FindFirstChild("Plot_" .. LP.Name)
+
+            Character:MoveTo("-0.00012599999899975955, 0.12499900162220001, 2016")
+
+            wait(0.25)
+
+            Character:MoveTo("-0.00012599999899975955, 0.12499900162220001, 2016")
+
+            wait(6.5)
+
+            Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+            Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+            Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+            Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+        end
+
+        wait()
+    end
+end
 
 
 local function script()
@@ -126,8 +224,255 @@ local function script()
 
 end
 
+local function script1()
+    local Window = Library.CreateLib("Sahex Hub - [B4]", "Ocean")
+
+    local Main = Window:NewTab("Main")
+    local MainSection = Main:NewSection("Main")
+
+    MainSection:NewLabel("Created by ZUHZUHLAH")
+
+    MainSection:NewToggle("Auto Grind Good items", "Infinitely tries to get good items for you while you sleep", function(state)
+        if state then
+            Toggle3 = true
+            notif2On()
+            autGr()
+        else
+            Toggle3 = false
+            notif1Off()
+        end
+    end)
+
+    MainSection:NewToggle("Auto Grind Items", "Infinitely tries to get items for you", function(state)
+        if state then
+            Toggle4 = true
+            notif2On()
+            autoGrind()
+        else
+            Toggle4 = false
+            notif1Off()
+        end
+    end)
+
+    MainSection:NewLabel("Remote")
+
+    MainSection:NewButton("Sell All", "Sells items Remotely", function()
+        local Event = game:GetService("ReplicatedStorage").Events.RequestSell
+        Event:FireServer(
+            "Inventory"
+        )
+    end)
+
+    MainSection:NewButton("Bulk Rebirth", "Makes you rebirth 50 times", function()
+        for i = 1,50 do
+            wait(0.001)
+            local Event = game:GetService("ReplicatedStorage").Events.RequestRebirth
+            Event:FireServer()
+            
+        end
+    end)
+
+    MainSection:NewButton("Buy Max speed", "Makes you max out your cash and buy speed boosts", function()
+
+
+        local Event = game:GetService("ReplicatedStorage").Events.RequestUpgradeAction
+        Event:FireServer(
+            "Speed",
+            "Max"
+        )
+    end)
+
+    MainSection:NewButton("Request and Equip best hair", "Spends a lot of money to buy the best hair", function()
+        local Event = game:GetService("ReplicatedStorage").Events.RequestLuckyBlockPurchase
+        Event:FireServer(
+            "LB022"
+        )
+    end)
+
+    MainSection:NewButton("Upgrade ALL Items", "Upgrades all the items by one", function()
+
+        local Event = game:GetService("ReplicatedStorage").Events.RequestSlotUpgrade
+        Event:FireServer(
+            "Floor4",
+            "Slot6"
+        )
+
+        Event:FireServer(
+            "Floor4",
+            "Slot5"
+        )
+        Event:FireServer(
+            "Floor4",
+            "Slot4"
+        )
+        Event:FireServer(
+            "Floor4",
+            "Slot3"
+        )
+        Event:FireServer(
+            "Floor4",
+            "Slot2"
+        )
+        Event:FireServer(
+            "Floor4",
+            "Slot1"
+        )
+        Event:FireServer(
+            "Floor4",
+            "Slot10"
+        )
+        Event:FireServer(
+            "Floor4",
+            "Slot9"
+        )
+        Event:FireServer(
+            "Floor4",
+            "Slot8"
+        )
+        Event:FireServer(
+            "Floor4",
+            "Slot7"
+        )
+
+        --Floor 3
+
+        Event:FireServer(
+            "Floor3",
+            "Slot6"
+        )
+
+        Event:FireServer(
+            "Floor3",
+            "Slot5"
+        )
+        Event:FireServer(
+            "Floor3",
+            "Slot4"
+        )
+        Event:FireServer(
+            "Floor3",
+            "Slot3"
+        )
+        Event:FireServer(
+            "Floor3",
+            "Slot2"
+        )
+        Event:FireServer(
+            "Floor3",
+            "Slot1"
+        )
+        Event:FireServer(
+            "Floor3",
+            "Slot10"
+        )
+        Event:FireServer(
+            "Floor3",
+            "Slot9"
+        )
+        Event:FireServer(
+            "Floor3",
+            "Slot8"
+        )
+        Event:FireServer(
+            "Floor3",
+            "Slot7"
+        )
+
+        -- Floor 2
+
+        Event:FireServer(
+            "Floor2",
+            "Slot6"
+        )
+
+        Event:FireServer(
+            "Floor2",
+            "Slot5"
+        )
+        Event:FireServer(
+            "Floor2",
+            "Slot4"
+        )
+        Event:FireServer(
+            "Floor2",
+            "Slot3"
+        )
+        Event:FireServer(
+            "Floor2",
+            "Slot2"
+        )
+        Event:FireServer(
+            "Floor2",
+            "Slot1"
+        )
+        Event:FireServer(
+            "Floor2",
+            "Slot10"
+        )
+        Event:FireServer(
+            "Floor2",
+            "Slot9"
+        )
+        Event:FireServer(
+            "Floor2",
+            "Slot8"
+        )
+        Event:FireServer(
+            "Floor2",
+            "Slot7"
+        )
+
+        -- Floor 1
+
+        Event:FireServer(
+            "Floor1",
+            "Slot6"
+        )
+
+        Event:FireServer(
+            "Floor1",
+            "Slot5"
+        )
+        Event:FireServer(
+            "Floor1",
+            "Slot4"
+        )
+        Event:FireServer(
+            "Floor1",
+            "Slot3"
+        )
+        Event:FireServer(
+            "Floor1",
+            "Slot2"
+        )
+        Event:FireServer(
+            "Floor1",
+            "Slot1"
+        )
+        Event:FireServer(
+            "Floor1",
+            "Slot10"
+        )
+        Event:FireServer(
+            "Floor1",
+            "Slot9"
+        )
+        Event:FireServer(
+            "Floor1",
+            "Slot8"
+        )
+        Event:FireServer(
+            "Floor1",
+            "Slot7"
+        )
+    end)
+end
+
+
 if game.PlaceId == 130526979296684 then
     script()
+elseif game.PlaceId == 139054513518556 then
+    script1()
 else
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "WARNING!",
