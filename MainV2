@@ -4,6 +4,106 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Picked = "None"
 local Toggle1 =  false
 local Toggle2 = false
+local Toggle3 = false
+local Toggle4 = false
+
+local function notif2On()
+    game:GetService("StarterGui"):SetCore("SendNotification", {
+        Title = "Toggle",
+        Text = "Toggle Turned on! WAITING 2 SECONDS",
+        Callback = Instance.new("BindableFunction"),
+        Button1 = "OK" 
+    })
+end
+
+local function autGr()
+    while true do
+        
+        wait(2)
+
+        if Toggle3 == true then
+            local Character = game.Players.LocalPlayer.Character
+            local LP = game.Players.LocalPlayer
+            local PlrPlot = game.Workspace:FindFirstChild("Plot_" .. LP.Name)
+
+            Character:MoveTo("-0.00012599999899975955, 0.12499900162220001, 2016")
+
+            wait(0.25)
+
+            Character:MoveTo("-0.00012599999899975955, 0.12499900162220001, 2016")
+
+            wait(6.5)
+
+            if string.find(game.Players:WaitForChild(LP.Name).PlayerGui.GUI.Frames.Notifications:FindFirstChild("ActiveNotification").Text:lower(), "divine") then
+
+                Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+
+            elseif
+                string.find(game.Players:FindFirstChild(LP.Name).PlayerGui.GUI.Frames.Notifications.ActiveNotification.Text:lower(), "secret") then
+                    Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                    Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                    Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                    Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+                    
+                    game.Players:FindFirstChild(LP.Name).PlayerGui.GUI.Frames.Notifications.ActiveNotification:Destroy()
+
+            else
+                print("Fack nah")
+                wait(1)
+            end
+        end
+
+        wait()
+    end
+end
+
+local function autoGrind()
+    while true do 
+        wait(2)
+
+        if Toggle3 == true and Toggle4 == true then
+            game:GetService("StarterGui"):SetCore("SendNotification", {
+                Title = "WARNING!",
+                Text = "Auto grind (For other items) has been turned off. To stop this, Turn off one of the Grinders",
+                Duration = 10,
+                Callback = Instance.new("BindableFunction"),
+                Button1 = "OK" 
+            })
+
+            local AlarmSound = Instance.new("Sound") 
+            AlarmSound.Parent = game.Workspace
+            AlarmSound.SoundId = "rbxassetid://6432593850"
+            AlarmSound.Playing = true
+            AlarmSound.Volume = 1
+
+            wait(10)
+
+            AlarmSound:Destroy()
+        elseif  Toggle4 == true then
+            local Character = game.Players.LocalPlayer.Character
+            local LP = game.Players.LocalPlayer
+            local PlrPlot = game.Workspace:FindFirstChild("Plot_" .. LP.Name)
+
+            Character:MoveTo("-0.00012599999899975955, 0.12499900162220001, 2016")
+
+            wait(0.25)
+
+            Character:MoveTo("-0.00012599999899975955, 0.12499900162220001, 2016")
+
+            wait(6.5)
+
+            Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+            Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+            Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+            Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
+        end
+
+        wait()
+    end
+end
 
 local function autoRb()
     while true do 
@@ -149,6 +249,18 @@ local function A1()
         end,
     })
 
+    local Button2 = MainTab:CreateButton({
+        Name = "Create Path",
+        Callback = function()
+            local Part = Instance.new("Part")
+
+            Part.Parent = Workspace
+            Part.Position = Vector3.new(784.17, 168.98, 952.61)
+            Part.Size = Vector3.new(35, 1 ,102)
+            Part.Anchored = true
+        end
+    })
+
     local Label4 = Fun:CreateLabel("Gender", nil, Color3.fromRGB(255, 255, 255), false)
 
     local Boy = Fun:CreateButton({
@@ -173,20 +285,40 @@ local function A1()
         end,
     })
 
-local Label5 = Fun:CreateLabel("Money Grind", nil, Color3.fromRGB(255, 255, 255), false)
+    local Label5 = Fun:CreateLabel("Super fast age grind (Cant join obby games)", nil, Color3.fromRGB(255, 255, 255), false)
 
 
-    local AutoPod = Fun:CreateDropdown({
-        Name = "Choose Pod (You cant join minigames)",
-        Options = {"None", "Basic", "Double", "Gold", "Diamond", "Emerald", "Molten", "Ruby", "Amethyst", "Sapphire", "Double Motlen"},
-        CurrentOption = {"None"},
-        MultipleOptions = false,
-        Callback = function(Options)
-            print(Options)
+    local TextInput = Fun:CreateInput({
+        Name = "Pod Name",
+        CurrentValue = "",
+        PlaceholderText = "(Use precise naming. Eg: 'Basic')",
+        RemoveTextAfterFocusLost = false,
+        Callback = function(Text)
+        -- The function that takes place when the input is changed
+        -- The variable (Text) is a string for the value in the text box
+            -- This code was generated by Cobalt
+        -- https://github.com/notpoiu/cobalt
 
-            Picked = Options
+            local Event = game:GetService("ReplicatedStorage").EnterAgeMachine
+            Event:FireServer(
+                Text.. "AgeMachine",
+                false
+            )
+
+            local LP = game.Players.LocalPlayer
+            
+            local LPC = game.Workspace:FindFirstChild(LP.Name)
+
+            for _, part in pairs(LPC:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Anchored = false
+                end
+            end
+            LPC.HumanoidRootPart.Anchored = false
+            game.Workspace:FindFirstChild(LP.Name).Humanoid.WalkSpeed = 16
         end,
     })
+
 
     local Label6 = Credits:CreateLabel("Made by ZUHZUHLAH", nil, Color3.fromRGB(255, 255, 255), false)
     local Label7 = Credits:CreateLabel("sites.google.com/view/sahex-lol", nil, Color3.fromRGB(255, 255, 255), false)
@@ -194,8 +326,302 @@ local Label5 = Fun:CreateLabel("Money Grind", nil, Color3.fromRGB(255, 255, 255)
     Rayfield:LoadConfiguration()
 end
 
+local function B4()
+    local Window = Rayfield:CreateWindow({
+        Name = "SAHEX MAIN [B4]",
+        Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+        LoadingTitle = "SAHEX-LOL",
+        LoadingSubtitle = "by Zah",
+        ShowText = "Sahex", -- for mobile users to unhide Rayfield, change if you'd like
+        Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+        ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+
+        DisableRayfieldPrompts = false,
+        DisableBuildWarnings = false, -- Prevents Rayfield from emitting warnings when the script has a version mismatch with the interface.
+
+   -- ScriptID = "sid_xxxxxxxxxxxx", -- Your Script ID from developer.sirius.menu — enables analytics, managed keys, and script hosting
+
+        ConfigurationSaving = {
+            Enabled = true,
+            FolderName = nil, -- Create a custom folder for your hub/game
+            FileName = "Big Hub"
+         },
+
+        Discord = {
+            Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+            Invite = "noinvitelink", -- The Discord invite code, do not include Discord.gg/. E.g. Discord.gg/ABCD would be ABCD
+            RememberJoins = true -- Set this to false to make them join the Discord every time they load it up
+        },
+
+        KeySystem = false, -- Set this to true to use our key system
+        KeySettings = {
+        Title = "Untitled",
+        Subtitle = "Key System",
+        Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+        FileName = "Key", -- It is recommended to use something unique, as other scripts using Rayfield may overwrite your key file
+        SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+        GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+        Key = {"Hello"} -- List of keys that the system will accept, can be RAW file links (pastebin, github, etc.) or simple strings ("hello", "key22")
+        }
+    })
+
+    local  MainTab = Window:CreateTab("Main", nil) -- Title, Image
+    local Credits = Window:CreateTab("Credits")
+
+    local Toggle = MainTab:CreateToggle({
+        Name = "Auto Grind good items",
+        CurrentValue = false,
+        Flag = "Toggle1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(state)
+            if state then
+                Toggle3 = true
+                autoGr()
+                notif2On()
+            else
+                Toggle3 = false
+            end
+        end,
+    })
+
+    local Toggle2 = MainTab:CreateToggle({
+        Name = "Auto Grind items",
+        CurrentValue = false,
+        Flag = "Toggle1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+        Callback = function(state)
+            if state then
+                Toggle4 = true
+                autoGrind()
+                notif2On()
+            else
+                Toggle4 = false
+            end
+        end,
+    })
+    
+    local Label6 = MainTab:CreateLabel("Remote", nil, Color3.fromRGB(255, 255, 255), false)
+
+    local Button1 = MainTab:CreateButton({
+        Name = "Bulk Rebirth",
+        Callback = function()
+            for i = 1,50 do
+                local Event = game:GetService("ReplicatedStorage").Events.RequestRebirth
+                Event:FireServer()
+            end
+        end,
+    })
+
+    local Button2 = MainTab:CreateButton({
+        Name = "Max Speed",
+        Callback = function()
+            local Event = game:GetService("ReplicatedStorage").Events.RequestUpgradeAction
+            Event:FireServer(
+                "Speed",
+                "Max"
+            )
+        end,
+    })
+
+    local Button3 = MainTab:CreateButton({
+        Name = "Request and equip best hair",
+        Callback = function()
+            local Event = game:GetService("ReplicatedStorage").Events.RequestLuckyBlockPurchase
+            Event:FireServer(
+                "LB022"
+            )
+        end,
+    })
+
+    local Button4 = MainTab:CreateButton({
+        Name = "Upgrade all brainrots"
+        Callback = function()
+            Event:FireServer(
+                "Floor4",
+                "Slot6"
+            )
+
+            Event:FireServer(
+                "Floor4",
+                "Slot5"
+            )
+            Event:FireServer(
+                "Floor4",
+                "Slot4"
+            )
+            Event:FireServer(
+                "Floor4",
+                "Slot3"
+            )
+            Event:FireServer(
+                "Floor4",
+                "Slot2"
+            )
+            Event:FireServer(
+                "Floor4",
+                "Slot1"
+            )
+            Event:FireServer(
+                "Floor4",
+                "Slot10"
+            )
+            Event:FireServer(
+                "Floor4",
+                "Slot9"
+            )
+            Event:FireServer(
+                "Floor4",
+                "Slot8"
+            )
+            Event:FireServer(
+                "Floor4",
+                "Slot7"
+            )
+
+            --Floor 3
+
+            Event:FireServer(
+                "Floor3",
+                "Slot6"
+            )
+
+            Event:FireServer(
+                "Floor3",
+                "Slot5"
+            )
+            Event:FireServer(
+                "Floor3",
+                "Slot4"
+            )
+            Event:FireServer(
+                "Floor3",
+                "Slot3"
+            )
+            Event:FireServer(
+                "Floor3",
+                "Slot2"
+            )
+            Event:FireServer(
+                "Floor3",
+                "Slot1"
+            )
+            Event:FireServer(
+                "Floor3",
+                "Slot10"
+            )
+            Event:FireServer(
+                "Floor3",
+                "Slot9"
+            )
+            Event:FireServer(
+                "Floor3",
+                "Slot8"
+            )
+            Event:FireServer(
+                "Floor3",
+                "Slot7"
+            )
+
+            -- Floor 2
+
+            Event:FireServer(
+                "Floor2",
+                "Slot6"
+            )
+
+            Event:FireServer(
+                "Floor2",
+                "Slot5"
+            )
+            Event:FireServer(
+                "Floor2",
+                "Slot4"
+            )
+            Event:FireServer(
+                "Floor2",
+                "Slot3"
+            )
+            Event:FireServer(
+                "Floor2",
+                "Slot2"
+            )
+            Event:FireServer(
+                "Floor2",
+                "Slot1"
+            )
+            Event:FireServer(
+                "Floor2",
+                "Slot10"
+            )
+            Event:FireServer(
+                "Floor2",
+                "Slot9"
+            )
+            Event:FireServer(
+                "Floor2",
+                "Slot8"
+            )
+            Event:FireServer(
+                "Floor2",
+                "Slot7"
+            )
+
+            -- Floor 1
+
+            Event:FireServer(
+                "Floor1",
+                "Slot6"
+            )
+
+            Event:FireServer(
+                "Floor1",
+                "Slot5"
+            )
+            Event:FireServer(
+                "Floor1",
+                "Slot4"
+            )
+            Event:FireServer(
+                "Floor1",
+                "Slot3"
+            )
+            Event:FireServer(
+                "Floor1",
+                "Slot2"
+            )
+            Event:FireServer(
+                "Floor1",
+                "Slot1"
+            )
+            Event:FireServer(
+                "Floor1",
+                "Slot10"
+            )
+            Event:FireServer(
+                "Floor1",
+                "Slot9"
+            )
+            Event:FireServer(
+                "Floor1",
+                "Slot8"
+            )
+            Event:FireServer(
+                "Floor1",
+                "Slot7"
+            )
+        end,
+    })
+
+    local Label6 = Credits:CreateLabel("Made by ZUHZUHLAH", nil, Color3.fromRGB(255, 255, 255), false)
+    local Label7 = Credits:CreateLabel("sites.google.com/view/sahex-lol", nil, Color3.fromRGB(255, 255, 255), false)
+
+    
+    Rayfield:LoadConfiguration()
+end
+
 if game.PlaceId == 130526979296684 then
     A1()
+elseif game.PlaceId == 1 then
+    B4()
 else
      local StarterGui = game:GetService("StarterGui")
 
