@@ -16,7 +16,7 @@ local function notif2On()
     })
 end
 
-local function autGr()
+local function autoGr()
     while true do
         
         wait(2)
