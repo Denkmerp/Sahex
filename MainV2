@@ -34,7 +34,7 @@ local function autGr()
 
             wait(6.5)
 
-            if string.find(game.Players:WaitForChild(LP.Name).PlayerGui.GUI.Frames.Notifications:FindFirstChild("ActiveNotification").Text:lower(), "divine") then
+            if string.find(game.Players:WaitForChild(LP.Name).PlayerGui.GUI.Frames.Notifications:WaitForChild("ActiveNotification").Text:lower(), "divine") then
 
                 Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
                 Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
@@ -54,7 +54,7 @@ local function autGr()
                 print("Fack nah")
                 wait(1)
             end
-        end
+        else return end
 
         wait()
     end
@@ -99,7 +99,7 @@ local function autoGrind()
             Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
             Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
             Character:MoveTo(PlrPlot.Floor1.BuyFloor.Part.Position)
-        end
+        else return end
 
         wait()
     end
