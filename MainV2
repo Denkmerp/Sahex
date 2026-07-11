@@ -433,7 +433,7 @@ local function B4()
     })
 
     local Button4 = MainTab:CreateButton({
-        Name = "Upgrade all brainrots"
+        Name = "Upgrade all brainrots",
         Callback = function()
             Event:FireServer(
                 "Floor4",
@@ -620,7 +620,7 @@ end
 
 if game.PlaceId == 130526979296684 then
     A1()
-elseif game.PlaceId == 1 then
+elseif game.PlaceId == 139054513518556 then
     B4()
 else
      local StarterGui = game:GetService("StarterGui")
