@@ -433,6 +433,16 @@ local function B4()
     })
 
     local Button4 = MainTab:CreateButton({
+        Name = "SELL ALL ITEMS",
+        Callback = function()
+            local Event = game:GetService("ReplicatedStorage").Events.RequestSell
+            Event:FireServer(
+                "Inventory"
+            )
+        end,
+    })
+
+    local Button5 = MainTab:CreateButton({
         Name = "Upgrade all brainrots",
         Callback = function()
             Event:FireServer(
